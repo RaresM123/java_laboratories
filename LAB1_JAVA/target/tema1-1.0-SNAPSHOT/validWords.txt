@@ -1,0 +1,6 @@
+D:\FAC_MASTER\AN1\SEM1\JAVA\tema1\target\tema1-1.0-SNAPSHOT\List of valid Strings:
+a
+l
+la
+ll
+all
