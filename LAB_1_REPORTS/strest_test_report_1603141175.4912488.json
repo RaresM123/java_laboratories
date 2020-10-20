@@ -1,0 +1,8 @@
+{
+    "execution_time": 90.51321125030518,
+    "maxim_request_time": 0.21342921257019043,
+    "medium_request_time": 0.11970612592995167,
+    "method": "GET",
+    "nr_of_letters": 6,
+    "nr_of_threads": 128
+}

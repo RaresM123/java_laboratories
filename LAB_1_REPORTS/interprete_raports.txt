@@ -1,0 +1,26 @@
+Responses time: timpul de raspundere pe baza rapoartelor date de stress test api
+                - GET: - odata cu cresterea numarului de litere se poate observa o crestere a timpului de executie(de exemplu pentru 128
+                       de thread-uri si 6 litere, executia tuturor thread-urilor a dat 90 de secunde) 
+                       - cresterea numarului de thread-uri, dar scaderea numarului de litere nu va impacta performanta(de exemplu pentru 500 
+                       de thread-uri si 4 litere, executia tuturor thread-urilor a dat 2 secunde
+                - POST - aceleasi probleme ca mai sus, timpul fiind chiar mai indelungat deoarece trebuie scris in fisier si ulterior returnat rezultatul din fisier
+
+Concurrency issues: probleme sesizate prin raspunsurile date de stress test api
+                    - GET: - nu am sesizat probleme de concurenta, pentru un numar variabil de thread-uri
+                           - acest fapt se datoreaza modului de constructie a raspunsului, acesta generandu-se independent pentru fiecare request
+                           - se construieste un sablon html si se returneaza catre client, neexistand operatii ce ar putea crea concurrency issues
+                    - POST - odata cu cresterea numarului de thread-uri se observa probleme legate de concurenta
+                           - raspunsul se scrie intr-un fisier cu extensia .txt si ulterior returnat catre client
+                           - scrierea si citirea sunt operatii blocante si atata timp cat nu exista un lock pe fisier, toate thread-urile vor
+                             incerca sa scrie si sa citeasca din acelasi fisier
+                           - problema se datoreaza si faptului ca pe baza implementarii mele, pentru fiecare request se rescrie fisierul de pe server si nu se face append
+                           - daca se face append, apar mai greu probleme de concurenta, deoarece thread-ul scrie raspunsul la finalul fisierului, dar
+                             dupa apare problema memoriei 
+                  
+
+Resource contention: - aceasta problema se aplica doar la POST, deoarece numai la aceasta metoda exista un fisier care este utilizat de mai multe
+                     thread-uri in acelasi timp
+                     - o solutie ar fi scrierea unui fisier pentru fiecare request si cand se inchide sesiunea sa se stearga fisierele de pe server
+                           - ar fi o crestere a memoriei destul de mare, mai ales daca vorbim de mii de thread-uri
+		     - utilizarea sincronize-ului asupra descriptorul de fisier, insa acesta trebuie initiat in clasa pentru 
+                       ca toate thread-urile sa aiba acces la un acelasi descriptor
