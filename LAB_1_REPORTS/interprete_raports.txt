@@ -11,7 +11,7 @@ Concurrency issues: probleme sesizate prin raspunsurile date de stress test api
                            - se construieste un sablon html si se returneaza catre client, neexistand operatii ce ar putea crea concurrency issues
                     - POST - odata cu cresterea numarului de thread-uri se observa probleme legate de concurenta
                            - raspunsul se scrie intr-un fisier cu extensia .txt si ulterior returnat catre client
-                           - scrierea si citirea sunt operatii blocante si atata timp cat nu exista un lock pe fisier, toate thread-urile vor
+                           - scrierea si citirea sunt operatii ce pot suferi probleme de concurenta si atata timp cat nu exista un lock pe fisier, toate thread-urile vor
                              incerca sa scrie si sa citeasca din acelasi fisier
                            - problema se datoreaza si faptului ca pe baza implementarii mele, pentru fiecare request se rescrie fisierul de pe server si nu se face append
                            - daca se face append, apar mai greu probleme de concurenta, deoarece thread-ul scrie raspunsul la finalul fisierului, dar

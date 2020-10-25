@@ -3,7 +3,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import javax.json.JsonArray;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +16,11 @@ import java.util.*;
         urlPatterns = {"/tema"})
 
 public class tema1 extends HttpServlet{
-
+    // list_of_words is a map which stores elements of type [Length(Item), List<Items>] 
     private Map<Integer, List<String>> list_of_words;
+    // stores the filename of the json file
     private String jsonFileName;
+    // stores json object from the file
     private JSONObject wordsDict;
 
     private void logClientInfo(ServletContext context, HttpServletRequest request) {
@@ -27,14 +28,12 @@ public class tema1 extends HttpServlet{
                 request.getMethod(), request.getRemoteAddr(), request.getHeader("User-Agent"),
                 request.getHeader("Accept-Language"), request.getParameterMap().toString()));
     }
-
+    // This function retrieves a json object from words json file
     public JSONObject getJson(){
         JSONObject wordsList = null;
         JSONParser jsonParser = new JSONParser();
-        System.out.println(jsonFileName);
+        //System.out.println(jsonFileName);
         try (FileReader reader = new FileReader(jsonFileName)) {
-            //Read JSON file
-//            System.out.println(reader.toString());
             Object obj = jsonParser.parse(reader);
 
             wordsList = (JSONObject) obj;
@@ -44,7 +43,7 @@ public class tema1 extends HttpServlet{
         }
         return wordsList;
     }
-
+    // This 
     public void populateHashMap(){
 
         for(Object key : wordsDict.keySet()){
@@ -69,24 +68,27 @@ public class tema1 extends HttpServlet{
         return rtnList;
     }
 
-    private static List<String> WordsRec(String base, int length, String characters) {
+    private static List<String> GetLettersCombination(String initialString, int lengthWord, String chr) {
         List<String> combinations = new ArrayList<String>();
-        for (int i = 0; i < characters.length(); i++){
-            char c = characters.charAt(i);
-            if (length == 1) {
-                combinations.add(base + String.valueOf(c));
+        int chrIdx = 0;
+        while(chrIdx < chr.length()){
+            if (lengthWord == 1) {
+                combinations.add(initialString + chr.charAt(chrIdx));
             }
             else{
-                combinations.addAll(WordsRec(base+c,length-1,characters));
+                combinations.addAll(GetLettersCombination(initialString+chr.charAt(chrIdx),
+                        lengthWord-1,chr));
             }
+            chrIdx += 1;
         }
         return combinations;
     }
+
     public List<String> processCombinations(String letters, int number)
     {
         List<String> returnList = null;
 //        char[] lettersArray = letters.toCharArray();
-        returnList = WordsRec("", number, letters);
+        returnList = GetLettersCombination("", number, letters);
         return returnList;
     }
     public List<String> processMap(int number, String letters){
@@ -153,9 +155,11 @@ public class tema1 extends HttpServlet{
         ServletContext context = getServletContext();
         logClientInfo(context, request);
         context.log(String.format("Received value for letters %s", value));
-//        System.out.println(context.getRealPath("/"));
+        context.log("Real path is: " + context.getRealPath("/"));
+        //se poate append ca si true: insa pentru multe litere si multe request-uri s-ar putea ca fisierul sa creasca exponential
+        //insa rezolva relativ problema concurentei la request-uri asincrone cu metoda post
+
         FileWriter writer = new FileWriter(context.getRealPath("/") + "validWords.txt", false);
-//        writer.write(context.getRealPath("/"));
         if(value == null){
             writer.write("The key is not valid for value");
             writer.close();
