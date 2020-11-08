@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.util.*;
 
 @WebServlet(name = "Tema2Servlet",
@@ -62,6 +63,10 @@ public class Lab2Servlet extends HttpServlet {
 
         Languages languages;
         wordDictContainer entryContainer;
+        String currentDate = DateFormat.getDateTimeInstance(
+                DateFormat.FULL,
+                DateFormat.SHORT,
+                request.getLocale()).format(new Date());
 //        RecordContainer recordContainer;
         HttpSession session = request.getSession(true);
 
@@ -95,6 +100,7 @@ public class Lab2Servlet extends HttpServlet {
         entry.setLanguage(request.getParameter("language"));
         entry.setWord(request.getParameter("word"));
         entry.setDefinition(request.getParameter("definition"));
+        entry.setCurrentDate(currentDate);
         String captchaInput = request.getParameter("captcha");
         String actualCaptcha = session.getAttribute("captchaResult").toString();
         if (captchaInput.equals(actualCaptcha)) {
@@ -103,6 +109,7 @@ public class Lab2Servlet extends HttpServlet {
                 session.setAttribute("entryContainer", new wordDictContainer(entryContainer));
                 session.setAttribute("languages", new Languages(languages));
                 request.setAttribute("entries", entryContainer.getAllRecords());
+                getServletContext().log("value for entry container:" + entryContainer.getAllRecords());
                 RequestDispatcher rd = request.getRequestDispatcher("jsp/result.jsp");
                 rd.forward(request, response);
             } catch (Exception e) {

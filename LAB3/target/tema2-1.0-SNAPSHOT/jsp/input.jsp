@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@page import="rmunteanu.models.Languages"%>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,15 +16,27 @@
     <title>Input JSP</title>
 </head>
 <body>
+<%
+    String language = request.getLocale().getLanguage();
+    out.print("<fmt:setLocale value=\""+language+"\"/>");
+%>
+
+<fmt:setBundle basename="rmunteanu.Internationalization.Messages"
+               var="msg"
+               scope="page"/>
 <h1>Words Dictionary</h1>
 <form action="controller" method="POST">
-    <label for="word">Word</label>
+    <label for="word"><fmt:message key="word"
+                                   bundle="${msg}"/>
+    </label>
     <input id="word" type="text" name="word"/>
 
-    <label for="definition">Definition</label>
+    <label for="definition"><fmt:message key="def"
+                                         bundle="${msg}"/></label>
     <input id="definition" type="text" name="definition"/>
 
-    <label for="language">Language</label>
+    <label for="language"><fmt:message key="lang"
+                                       bundle="${msg}"/></label>
     <select id="language" type="text" name="language">
 
         <%

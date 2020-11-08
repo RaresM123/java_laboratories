@@ -2,6 +2,8 @@ package rmunteanu.models;
 
 import rmunteanu.models.exceptions.DuplicateWordException;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +12,11 @@ public class wordDictContainer {
     Map<String, wordsDict> wordsRecords;
 
     public wordDictContainer() {
-        wordsRecords= new HashMap<String, wordsDict>();
+        wordsRecords = new HashMap<String, wordsDict>();
     }
 
     public wordDictContainer(wordDictContainer container) {
-        wordsRecords = container.getAllRecords();
+        wordsRecords = container.wordsRecords;
     }
 
     public void addRecord(wordsDict record)
@@ -26,8 +28,8 @@ public class wordDictContainer {
         wordsRecords.put(record.getWord(), record);
     }
 
-    public Map<String, wordsDict> getAllRecords()
+    public Collection<wordsDict> getAllRecords()
     {
-        return new HashMap<>(wordsRecords);
+        return wordsRecords.values();
     }
 }

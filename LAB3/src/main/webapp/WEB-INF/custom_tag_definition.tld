@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+    <tlib-version>1.0</tlib-version>
+    <short-name>custom_tag_definition</short-name>
+    <uri>/WEB-INF/custom_tag_definition</uri>
+
+    <tag>
+        <name>definition</name>
+        <tag-class>rmunteanu.tags.definitionTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <name>word</name>
+            <required>true</required>
+            <!--<type>String</type>-->
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>def</name>
+            <required>true</required>
+            <!--<type>String</type>-->
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>language</name>
+            <!--<type>String</type>-->
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+    </tag>
+
+</taglib>

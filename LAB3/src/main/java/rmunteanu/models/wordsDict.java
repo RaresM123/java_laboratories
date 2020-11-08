@@ -6,13 +6,14 @@ public class wordsDict implements Serializable {
     private String language;
     private String word;
     private String definition;
-
+    private String currentDate;
     public wordsDict(){}
 
-    public wordsDict(String language, String word, String definition){
+    public wordsDict(String language, String word, String definition, String currentDate){
         this.language = language;
         this.word = word;
         this.definition = definition;
+        this.currentDate = currentDate;
     }
 
     public String getLanguage() {
@@ -37,5 +38,13 @@ public class wordsDict implements Serializable {
 
     public void setDefinition(String definition) {
         this.definition = definition;
+    }
+
+    public String getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(String currentDate) {
+        this.currentDate = currentDate;
     }
 }

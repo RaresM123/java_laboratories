@@ -9,21 +9,33 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="rmunteanu.models.wordsDict"%>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Collection" %>
+<%@taglib prefix = "tlib" uri = "/WEB-INF/custom_tag_definition.tld"%>
+<%@taglib prefix="tcustom" tagdir="/WEB-INF/tags" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Result JSP</title>
+    <style>
+        table,th,td
+        {
+            border:1px solid black;
+        }
+    </style>
 </head>
 <body>
 <h1>Result page</h1>
 <%
-    Map<String, wordsDict> records = (HashMap<String, wordsDict>)request.getAttribute("entries");
-    for (String word : records.keySet())
+    Collection<wordsDict> records = (Collection)request.getAttribute("entries");
+    for (wordsDict word : records)
     {
-        out.print(word + ":" + records.get(word).getDefinition());
+        out.print(word.getWord() + ":" + word.getDefinition() + ":" + word.getCurrentDate());
         out.print("<br/>");
     }
 %>
+<%--    <tcustom:jstl_table entries="${requestScope.entries}"/>--%>
 </body>
 </html>
