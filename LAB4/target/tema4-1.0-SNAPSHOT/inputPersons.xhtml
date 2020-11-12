@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    <title>Person Register</title>
+</h:head>
+<h:body>
+    <h:form>
+    <h:outputLabel for="userName" value="Person Name:"/><br></br>
+        <h:inputText id="userName"
+                     value="#{personBean.name}"
+                     required="true"/><br></br><br></br>
+    <h:outputLabel for="idPerson" value="Id:"/><br></br>
+        <h:inputText id="idPerson"
+                     value="#{personBean.id}"
+                     required="true"/><br></br><br></br>
+
+    <h:commandButton id="submit" value="Submit" action="#{managerBean.addPerson(personBean)}"/>
+    </h:form>
+</h:body>
+
+</html>
+
