@@ -1,6 +1,9 @@
 package rmunteanu.meeting_problem;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.chocosolver.solver.*;
@@ -18,6 +21,7 @@ public class MeetingProblemSolver {
     int[][] distanceBetweenMeetings;
 
     IntVar[] meeting;
+    static Map<Integer, Integer> results = new HashMap<>();
 
     public void Init(FileNameBean fileNameBean) throws IOException {
         try (Scanner sc = new Scanner(new File(fileNameBean.getFilename()))) {
@@ -87,10 +91,15 @@ public class MeetingProblemSolver {
         return solverProblem.findSolution();
     }
 
-//    void result() {
-//
-//        for (int i = 0; i < meetingsNr; i++) {
+    public void populateResults() {
+
+        for (int i = 0; i < meetingsNr; i++) {
 //            System.out.println(i + " " + meeting[i].getValue());
-//        }
-//    }
+            results.put(i, meeting[i].getValue());
+        }
+    }
+
+    public static Map<Integer, Integer> getResults(){
+        return results;
+    }
 }
