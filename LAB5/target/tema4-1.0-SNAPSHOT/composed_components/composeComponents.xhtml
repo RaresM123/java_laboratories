@@ -1,0 +1,41 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core"
+      xmlns:composite = "http://java.sun.com/jsf/composite">
+
+<composite:interface>
+    <composite:attribute name = "meetingIdLabel" />
+    <composite:attribute name = "meetingIdValue" />
+    <composite:attribute name = "topicLabel" />
+    <composite:attribute name = "topicValue" />
+    <composite:attribute name = "timeMeetingLabel" />
+    <composite:attribute name = "timeMeetingValue" />
+    <composite:attribute name = "durationMeetingLabel" />
+    <composite:attribute name = "durationMeetingValue" />
+    <composite:attribute name = "personsMeetingLabel" />
+    <composite:attribute name = "personsMeetingValue" />
+    <composite:attribute name = "locationMeetingLabel" />
+    <composite:attribute name = "locationMeetingValue" />
+
+</composite:interface>
+
+<composite:implementation>
+    <h:form>
+        <h:message for = "informationPanel" style = "color:red;" />
+
+        <h:panelGrid columns = "2" id = "informationPanel">
+            #{cc.attrs.meetingIdLabel} :
+            <h:inputText id = "username" value = "#{cc.attrs.usernameValue}" />
+            #{cc.attrs.passwordLabel} :
+            <h:inputSecret id = "password" value = "#{cc.attrs.passwordValue}" />
+        </h:panelGrid>
+
+        <h:commandButton action = "#{cc.attrs.loginButtonAction}"
+                         value = "#{cc.attrs.loginButtonLabel}"/>
+    </h:form>
+</composite:implementation>
+</html>
