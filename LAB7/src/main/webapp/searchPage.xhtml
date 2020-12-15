@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Copyright (c) 2020.
+  -->
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<ui:composition template="/templates/dataEdit.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Meetings Search Page</ui:define>
+    <ui:define name="pageTitle">Meetings Search Page</ui:define>
+    <ui:param name="pageTitle" value="Meetings Search Page" />
+    <ui:define name="ContentEditData">
+
+        <p:selectManyCheckbox id="basic" value="#{MeetingSearch.selectedItems}">
+            <f:selectItem itemLabel="Topic Filter" itemValue="topic" />
+            <f:selectItem itemLabel="Person Name Filter" itemValue="name" />
+            <f:selectItem itemLabel="Location FIlter" itemValue="location" />
+        </p:selectManyCheckbox>
+
+        <h2><h:outputLabel for="SearchItem" value="Search Item:"/></h2>
+        <h2><h:inputText id="SearchItem" value="#{MeetingSearch.searchItem}" required="true"/>
+
+            <h:commandButton id="submit" value="Search" action="#{MeetingSearch.SearchCompleteItem}" ajax="true"
+                             update="meetingsEntity" /></h2>
+
+        <br/>
+        <p:dataTable id="meetingsEntity" value = "#{MeetingSearch.meetingsBeanEntities}" var = "meetEnt">
+            <p:column headerText="ID_FILTER">
+                <h:outputText value="#{meetEnt.entity.id}" />
+            </p:column>
+            <p:column headerText="TOPIC_FILTER">
+                <h:outputText value="#{meetEnt.entity.topic}" />
+            </p:column>
+            <p:column headerText="STARTING_TIME_FILTER">
+                <h:outputText value="#{meetEnt.entity.starting_time}" />
+            </p:column>
+            <p:column headerText="DURATION_FILTER">
+                <h:outputText value="#{meetEnt.entity.duration}" />
+            </p:column>
+            <p:column headerText="PERSONS_IDS_FILTER">
+                <h:outputText value="#{meetEnt.entity.entityPersons}"/>
+            </p:column>
+            <p:column headerText="LOCATION_ID_FILTER">
+                <h:outputText value="#{meetEnt.entity.entityLocation}"/>
+            </p:column>
+        </p:dataTable>
+
+    </ui:define>
+</ui:composition>
+</html>
