@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>File Simple User Upload</title>
+</h:head>
+<h:body>
+    <h2>Selection of upload file</h2>
+    <h:form id="uploadForm" enctype="multipart/form-data">
+        <p:panel header="Upload Form" style="width: 500px;">
+            <p:messages/>
+            <p:panelGrid columns="2">
+                <p:fileUpload value="#{serviceUploadBean.uploadedFile}" mode="simple" skinSimple="true"/>
+                <br/><br/>
+                <p:commandButton action="#{serviceUploadBean.uploadNewFile}"
+                                 value="Upload" ajax="false"/>
+                <p:growl id="messages" showDetail="true" />
+            </p:panelGrid>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
