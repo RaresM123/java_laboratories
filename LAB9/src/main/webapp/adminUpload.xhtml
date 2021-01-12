@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Login Page</title>
+</h:head>
+<h:body>
+
+    <h2>Admin Uploads</h2>
+    <p:dataTable value = "#{cacheBean.documentsUploadList}" var = "documentsUploads">
+        <p:column headerText="ID">
+            <h:outputText value="#{documentsUploads.entity.id}" />
+        </p:column>
+
+        <p:column headerText="CreatedID">
+            <h:outputText value="#{documentsUploads.entity.randomGeneratedId}" />
+        </p:column>
+
+        <p:column headerText="Username">
+            <h:outputText value="#{documentsUploads.entity.usr.usr}" />
+        </p:column>
+
+        <p:column headerText="Document">
+            <h:outputText value="#{documentsUploads.entity.fileName}" />
+        </p:column>
+
+    </p:dataTable>
+
+</h:body></html>
