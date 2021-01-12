@@ -40,4 +40,92 @@
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <url-pattern>/simpleUserUpload.xhtml</url-pattern>
     </filter-mapping>
+
+    <security-role>
+        <description>Administrator</description>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <description>Guests</description>
+        <role-name>guest</role-name>
+    </security-role>
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>UpdateDocument</web-resource-name>
+            <url-pattern>/document_update</url-pattern>
+            <http-method>PUT</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+            <role-name>guest</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>AddDocument</web-resource-name>
+            <url-pattern>/document_add</url-pattern>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>guest</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>DeleteDocument</web-resource-name>
+            <url-pattern>/document_delete</url-pattern>
+            <http-method>DELETE</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>jdbc-new-realm</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/login.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <security-constraint>
+        <display-name>SecurityConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>ViewDocumentServiceWS</web-resource-name>
+            <url-pattern>/ViewDocumentService</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <security-constraint>
+        <display-name>For Only Admin</display-name>
+        <web-resource-collection>
+            <web-resource-name>Management of user</web-resource-name>
+            <url-pattern>/admin_directory/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>For Only Guest</display-name>
+        <web-resource-collection>
+            <web-resource-name>action of upload documents</web-resource-name>
+            <url-pattern>/guest_directory/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>guest</role-name>
+        </auth-constraint>
+    </security-constraint>
+
 </web-app>
