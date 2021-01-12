@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Registration Page</title>
+</h:head>
+<body>
+<h:form id="registrationForm">
+    <p:panel header="Registration Form" style="width: 500px;">
+        <p:messages/>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="UserName:"/>
+            <h:inputText id="userName" value="#{userBean.userEntity.usr}" label="UserName" />
+
+            <h:outputLabel value="Password:"/>
+            <h:inputSecret id="password" value="#{userBean.userEntity.pwd}" label="Password"/>
+
+            <h:outputLabel value=""/>
+            <h:commandButton action="#{serviceRegisterBean.addUsr(userBean)}" value="Register" update="registrationForm"/>
+
+        </h:panelGrid>
+    </p:panel>
+</h:form>
+</body>
+</html>

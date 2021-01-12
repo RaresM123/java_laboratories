@@ -1,0 +1,10 @@
+<!--
+  ~ Copyright (c) 2020.
+  -->
+
+<glassfish-web-app>
+    <resource-ref>
+        <res-ref-name>java:app/custom_jndi</res-ref-name>
+        <jndi-name>custom_jndi</jndi-name>
+    </resource-ref>
+</glassfish-web-app>
