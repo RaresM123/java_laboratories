@@ -2,6 +2,7 @@ package rmunteanu.javaRs;
 
 import rmunteanu.javaEntities.UploadEntity;
 import rmunteanu.javaInterfaces.InterfaceUpload;
+import javax.annotation.security.RolesAllowed;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -10,12 +11,16 @@ import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
 
 @Path("/document_delete")
+@RolesAllowed("admin")
+
 public class DeleteDocumentService {
     @Inject
     private InterfaceUpload serviceUpload;
     @DELETE
     @Path("/{idParam}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed("admin")
+
     public Response deleteDocumentFunction(@PathParam("idParam") BigDecimal idParam) {
         try {
             UploadEntity uploadEntity = serviceUpload.uploadFind(idParam);

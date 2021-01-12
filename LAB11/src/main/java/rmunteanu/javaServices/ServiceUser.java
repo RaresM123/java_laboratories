@@ -3,6 +3,7 @@ package rmunteanu.javaServices;
 import rmunteanu.javaBeans.UserBean;
 import rmunteanu.javaEntities.UserEntity;
 import rmunteanu.javaInterfaces.InterfaceUser;
+import javax.annotation.security.PermitAll;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
+@PermitAll
 public class ServiceUser extends DataRepositoryManager<UserEntity,Integer> implements InterfaceUser {
     @PersistenceContext
     private EntityManager em;

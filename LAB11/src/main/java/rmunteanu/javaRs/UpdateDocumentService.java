@@ -1,4 +1,5 @@
 package rmunteanu.javaRs;
+import javax.annotation.security.RolesAllowed;
 
 import rmunteanu.javaEntities.UploadEntity;
 import rmunteanu.javaInterfaces.InterfaceUpload;
@@ -9,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/document_update")
+@RolesAllowed({"admin","guest"})
+
 public class UpdateDocumentService {
     @Inject
     private InterfaceUpload serviceUpload;
@@ -16,6 +19,8 @@ public class UpdateDocumentService {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","guest"})
+
     public Response updateDocumentUploadFunction(UploadEntity uploadEntity)
     {
         try {

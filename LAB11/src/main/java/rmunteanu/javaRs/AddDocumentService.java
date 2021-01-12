@@ -3,6 +3,7 @@ package rmunteanu.javaRs;
 import rmunteanu.javaBeans.ServiceUploadBean;
 import rmunteanu.javaEntities.UploadEntity;
 import rmunteanu.javaInterfaces.InterfaceUpload;
+import javax.annotation.security.RolesAllowed;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/document_add")
+@RolesAllowed("guest")
 public class AddDocumentService {
     @Inject
     private InterfaceUpload serviceUpload;
